@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximun-scale= 1.0, minimun-scale= 1.0, user-scalable=1">
+		<title></title>
+		<link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="libs/swiper/swiper.min.css" />
+		<link rel="stylesheet" href="libs/jquery-confirm/jquery-confirm.css">
+		<link rel="stylesheet" href="libs/css/common.min.css" />
+		<!--<link rel="stylesheet" href="libs/css/xiangqing1.min.css" />-->
+		
+		<link rel="stylesheet" href="libs/css/xiangqing1.css" />
+		<script type="text/javascript" src="libs/swiper/swiper.min.js" ></script>
+		<script src="libs/angular.min.js"></script>
+		<script src="libs/jquery/jquery-2.1.1.min.js"></script>
+		<script src="libs/jquery-confirm/jquery-confirm.js"></script>
+		<script src="libs/js/common.js"></script>
+		<script src="libs/js/details.js"></script>
+		<script src="libs/js/commonbaseurl.js"></script>
+		
+	</head>
+	<body ng-app='detailsapp' ng-controller='detailscontroller'>
+		<div class="header">
+			<div class="header_1">
+				<a href="javascript:history.back()" class="a1"><i class="fa fa-angle-left"></i></a>
+				<div>
+					<a  class="xiangqing">详情</a>
+					<a class="review">评论</a>
+				</div>
+				<a href="#" class="a2"><i class="fa fa-list-ul"></i></a>
+			</div>
+		</div>
+		<div class="content">
+			<!--轮播图-->			
+				<div class="swiper-container">
+				  <div class="swiper-wrapper">
+				    <div class="swiper-slide"><img src="image/54.jpg" alt=""></div>
+				    <div class="swiper-slide"><img src="image/55.jpg" alt=""></div>
+				    <div class="swiper-slide"><img src="image/56.jpg" alt=""></div>
+				  </div>
+				</div>
+				<!--<div class="wenzi"><p>斯文印花黑灰色<p><p>￥120</p></div>-->
+				<div class="xj">
+					<ul>
+						<li>品牌名称：<span>LLDSBHJDS</span></li>
+						<li>商品名称：<span>女款黑白色条纹上衣阔腿裤套装</span></li>
+						<li>产地：<span>中国</span></li>
+						<li>材质：<span>上衣:粘纤77%    聚酯纤维18.5%    氨纶4.5%     裤子:聚酯纤维100%   (装饰物除外)</span></li>
+						<li>洗涤说明：<span>最高洗涤温度40℃ 不可漂白 平摊晾干 熨斗底板最高温度110℃ 常规干洗（深色或者深色与浅色相拼的衣服洗涤时请注意：不宜用碱性过强的洗涤液；不宜浸泡时间过久）</span></li>
+					</ul>
+				</div>
+				<div class="imge"><img src="image/60.jpg"></div>
+		</div>
+		<!--评论-->
+		<div style="display: none;" class="review_content">
+			<div ng-repeat="m in datalist">
+				<ul>
+					<li ng-bind="m.username"></li>
+				</ul>
+				<ul>
+					<li ng-bind="m.tview"></li>
+				</ul>
+			</div>
+		</div>
+		<div class="footer">
+			<ul>
+    			<li>
+    				<a href="shopcart.html"><i class="fa fa-shopping-cart"></i></a>
+    				<div class="cart-num">0</div>
+    			</li>
+    			<li class="shop1">加入购物车</li>
+    			<li><a href="shopcart.html">立即购买</a></li>
+    			
+    		</ul>
+		</div>	
+		<div class="navmorelist" id="navmorelist">
+			<ul class="f14">
+				<li><a href="index.html">首页</a></li>
+				<li><a href="details.html">分类查询</a></li>
+				<li><a href="#">购 物 车</a></li>
+				<li><a href="#">会员中心</a></li>
+			</ul>
+		</div>	
+		<script>
+			var mySwiper = new Swiper('.swiper-container', {
+			autoplay: 2000,//可选选项，自动滑动
+			speed: 20,
+			autoHeight:true
+		});
+		var index = location.search.replace("_","");
+		var index=index.split('=');
+		
+		var a=parseInt(index[1]);
+//		console.log(a);
+		var $swiper_container=$('.swiper-container');		
+		var detailsapp=angular.module('detailsapp',['commonApp']);
+			detailsapp.controller('detailscontroller',['$scope','$http',function($scope,$http){
+				//details.php访问的是列表页的数据库，根据url把数据加载到details页面；根据返回来的数据取得image;
+				$http.post(baseurl+"xnxm/libs/PHP/details.php",{
+						productid:a,						
+					}).success(function(response){
+						if(response.state){							
+							var theimage=response.messagetrue;
+							var ss=theimage[0].productimage;
+//							console.log(ss);
+							$swiper_container.after('<div class="wenzi"><p>'+response.messagetrue[0].productdetails+'<p><p>￥'+response.messagetrue[0].productprice+'</p></div>');
+							//当点击的时候，把详情及价格及图片传到shopchar里面，shopchar.PHP是与shopcart进行连接
+							$('.shop1').on("touchstart",function(){
+								var details=$(this).offsetParent('.footer').siblings('.content').children('.wenzi').find('p').eq(0).text();
+								var price=$(this).offsetParent('.footer').siblings('.content').children('.wenzi').find('p').eq(2).text();
+								
+								$http.post(baseurl+"xnxm/libs/PHP/shopcart.php",{
+									productdetails1:details,
+									productprice1:price,
+									productimage:ss
+								}).success(function(responseadd){
+									if(responseadd.state){
+										$.alert("添加成功！");									
+									}else{
+										//点击两个相同的时候，就请求shopcartcount.php,她是修改数据库shopcart数量的；
+										var cc=responseadd.zong;
+										var dd=(cc[0].productcount)*1+1;										
+										$http.post(baseurl+"xnxm/libs/PHP/shopcartcount.php",{
+											productdetails2:details,
+											productcount:dd											
+										}).success(function(responseadd){											
+											$.alert("添加成功了！！！！");										
+										})
+									}
+									//点击的时候能显示数字
+									$http.post(baseurl+'xnxm/libs/PHP/shopcartone.php',{										
+									}).success(function(res){									
+										var y=0;
+										var tshopcartcount=$('.cart-num').text();
+										for (var i=0;i<res.mproductcount.length;i++) {											
+											y+=(res.mproductcount[i].productcount)*1;																						
+										}
+										$('.cart-num').text(y);										
+									})								
+								})	
+							})
+						}else{							
+						}
+						//不点击添加的时候也能实现数字
+						$http.post(baseurl+'xnxm/libs/PHP/shopcartone.php',{						
+							}).success(function(res){									
+								var y=0;
+								var tshopcartcount=$('.cart-num').text();
+								for (var i=0;i<res.mproductcount.length;i++){											
+									y+=(res.mproductcount[i].productcount)*1;																						
+								}
+								$('.cart-num').text(y);										
+							})
+						
+					})
+					//评论
+					$http.post(baseurl+'xnxm/libs/PHP/review.php',{
+						
+					}).success(function(r){
+						if(r.state){
+							$scope.datalist=r.messagetrue;
+							
+						}						
+					})
+					$('.review').on('touchstart',function(){
+						$('.content').css('display','none');
+						$('.review_content').css('display','block');						
+					})
+					$('.xiangqing').on('touchstart',function(){
+						$('.content').css('display','block');
+						$('.review_content').css('display','none');
+					})				
+			}])	
+		</script>	
+	</body>
+</html>

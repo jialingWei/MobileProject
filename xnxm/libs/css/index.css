@@ -1,0 +1,299 @@
+html, body {
+  width: 100%;
+  height: 100%; }
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none; }
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background-color: #CD235C;
+  color: #eee;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+   }
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background-color: #4a3232; }
+
+.content {
+  position: fixed;
+  top: 48px;
+  bottom: 48px;
+  left: 0;
+  right: 0;
+  width: 100%; }
+
+.header > div:nth-child(1) {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  width: 90%;
+  text-align: center;
+  line-height: 48px; }
+
+.header > div:nth-child(2) {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 20px; }
+  .header >div > span:nth-child(1){
+  	position: absolute;
+	  top: 0px;
+	  left: 20px;
+	  bottom: 0px;
+	  width: 20px; 
+	  width: 20%;
+  	text-align: center;
+  	font-size: 12px;
+  	color: darkorange;
+  }
+  }
+   #header_one{
+  	position: absolute;
+	  top: 0px;
+	 	right:20px ;
+	 	height: 48px;
+	  bottom: 0px;	  
+	  width: 70%;
+  	text-align: center;
+  }
+  .header > div:nth-child(2) > a {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 20px;
+    line-height: 46px; }
+
+.content {
+  overflow: auto; }
+  .content > .swiper-container {
+    width: 100%;
+    height: 100px;
+    background-color: #286090;
+    overflow: hidden; }
+  .content > .tu1 {
+    width: 100%;
+    top: 100px;
+   
+    left: 0;
+    right: 0; }
+    .content > .tu1 > img {
+      display: inline-block;
+      width: 100%;
+       height: 100px;
+       }
+  .content > .tu2 {
+    width: 100%;
+   
+    left: 0;
+    right: 0; }
+    .content > .tu2 > img {
+      display: inline-block;
+      width: 100%;
+      height: 155px; }
+  .content > .tu3 {
+    position: relative;
+    width: 100%;
+    left:0px;    
+    top: 0px;
+    bottom: 0px;
+    height: 17%; }
+    .content > .tu3 > img:nth-child(1) {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      height:100%;
+      width: 50%; }
+    .content > .tu3 > img:nth-child(2) {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      height: 100%;
+      width: 50%; }
+  .content > .tu4 {
+    position: relative;
+    width: 100%;
+    left:0px;    
+    top: 0px;
+    bottom: 0px;
+    height: 17%; }
+    .content > .tu4 > img:nth-child(1) {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      height: 100%;
+      width: 50%; }
+    .content > .tu4 > img:nth-child(2) {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      height: 100%;
+      width: 50%; }
+  .content > .tu5 {
+   position: relative;
+    width: 100%;
+    left:0px;    
+    top: 0px;
+    bottom: 0px;
+    height: 17%;  }
+    .content > .tu5 > img:nth-child(1) {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+     height: 100%;
+      width: 50%; }
+    .content > .tu5 > img:nth-child(2) {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      height: 100%;
+      width: 50%; }
+  .content > .tu6 {
+    position: relative;
+    width: 100%;
+    left:0px;    
+    top: 0px;
+    bottom: 0px;
+    height: 17%; }
+    .content > .tu6 > img:nth-child(1) {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      height: 100%;
+      width: 50%; }
+    .content > .tu6 > img:nth-child(2) {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      height: 100%;
+      width: 50%; }
+  .content > .tu7 {
+    position: relative;
+    width: 100%;
+    left:0px;    
+    top: 0px;
+    bottom: 0px;
+    height: 17%  }
+    .content > .tu7 > img:nth-child(1) {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      height: 100%;
+      width: 50%; 
+      }
+    .content > .tu7 > img:nth-child(2) {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      height: 100%;
+      width: 50%; }
+  .content >.oul {
+  	clear: both;
+    position: relative;
+    width: 100%;
+    top: 4px; }
+    .content >.oul > li > a > img {
+      display: inline-block;
+      width: 100%; }
+  .content > .scrolltop {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background-color: #e80080;
+    position: fixed;
+    right: 15px;
+    bottom: 60px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    color: #fff;
+    opacity: 0.7; }
+
+.footer > ul > li {
+  width: 20%;
+  height: 48px;
+  float: left;
+  line-height: 48px;
+  text-align: center; 
+  color: #e4cdcd;
+  font-size: 14px;
+  }
+  .footer > ul > li>a{
+  	color: #e4cdcd;
+  	font-size: 14px;
+  }
+
+.search-content {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: #fff; }
+  .search-content > .search-bar {
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 10px;
+    position: relative;
+    background-color: #8E488E; }
+    .search-content > .search-bar > div {
+      height: 100%;
+      position: absolute;
+      left: 40px;
+      right: 40px;
+      line-height: 48px;
+      color: #fff;
+      font-size: 16px;
+      text-align: center; }
+    .search-content > .search-bar > a:last-child {
+      display: block;
+      position: absolute;
+      right: 40px;
+      top: 0; }
+  .search-content > div.input-group {
+    width: 100%;
+    padding: 10px 15px;
+    position: relative;
+    display: table;
+    border-collapse: separate; }
+    .search-content > div.input-group > span:first-child {
+      color: #aaa;
+      border-radius: 6px 0 0 6px; }
+    .search-content > div.input-group > input {
+      border-left: none;
+      box-shadow: none;
+      outline: none;
+      border-color: #E5E6E7; }
+    .search-content > div.input-group > span:last-child {
+      border-radius: 0 6px 6px 0;
+      border-left: 0; }
+    .search-content > div.input-group > .input-group-addon {
+      background-color: #fff;
+      border: 1px solid #E5E6E7;
+      border-radius: 1px;
+      color: inherit;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1;
+      padding: 6px 12px;
+      text-align: center; }

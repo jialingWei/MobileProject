@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<!-- author: Jialing wei-->
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximun-scale= 1.0, minimun-scale= 1.0, user-scalable=1">
+		<title></title>
+		<!--<script type="text/javascript" src="libs/dist/all.js"></script>-->
+		<link href="libs/swiper/swiper.min.css">
+		<link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="libs/css/common.css">
+		<link rel="stylesheet" href="libs/css/index.css" />
+		<script src="libs/jquery/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="libs/swiper/swiper.min.js"></script>
+		<script src="libs/lazyload/jquery.lazyload.min.js"></script>
+		<script src="libs/iscroll-5.1.3/build/iscroll-probe.js"></script>
+		<script src="libs/js/index.js"></script>
+		<!--<script type="text/javascript" src="libs/dist/all.min.js" ></script>-->
+	</head>
+	<body>
+		<div class="header">
+			<div><span id="username"></span><span id="header_one">wjl商城</span></div>
+			<div>
+				<a href="#" id="sousuo"><i class="fa fa-search"></i></a>
+			</div>
+		</div>
+		<!--搜索-->
+		<div class="search-content">
+			<div class="search-bar">
+				<div>商品搜索</div>
+				<a href="#" class="close"><i class="fa fa-close"></i></a>
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon"><i class="fa fa-search"></i> </span>
+				<input type="text" class="input-group-addon" ng-model="keyword">
+				<span class="input-group-addon"><a href="index.html?keyword=">搜索</a></span>
+			</div>
+		</div>
+		<div class="content" id="wrapper">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide"><img src="image/1.jpg"></div>
+					<div class="swiper-slide"><img src="image/2.jpg"></div>
+					<div class="swiper-slide"><img src="image/3.jpg"></div>
+				</div>
+			</div>
+			<div class="tu1"><img class="lazy" data-original="image/49.jpg" width="100%" height="200px"></div>
+			<div class="tu2"><img class="lazy" data-original="image/31.jpg"></div>
+			<!--男装加婴儿-->
+			<div class="tu3">
+				<img class="lazy" data-original="image/27.jpg">
+				<img class="lazy" data-original="image/28.jpg">
+			</div>
+			<!--下面部分可以copy-->
+			<div class="tu4">
+				<img class="lazy" data-original="image/29.jpg">
+				<img class="lazy" data-original="image/30.jpg">
+			</div>
+			<div class="tu5">
+				<img class="lazy" data-original="image/32.jpg">
+				<img class="lazy" data-original="image/33.jpg">
+			</div>
+			<div class="tu6">
+				<img src="image/34.jpg" />
+				<img src="image/35.jpg" />
+			</div>
+			<div class="tu7">
+				<img src="image/36.jpg" />
+				<img src="image/37.jpg" />
+			</div>
+			<!--<div id="scroller">-->
+			<ul class="oul" id="list">
+
+			</ul>
+			<!--<div id="pullUp" class="">
+				<div class="pullUpLabel">加载更多</div>
+			</div>-->
+
+			<!--</div>-->
+
+			<div class="scrolltop"><i class="fa fa-arrow-up"></i></div>
+
+		</div>
+		<div class="footer">
+			<ul>
+				<li>
+					<a href="index.html">首页<i class="fa fa-home fa-fw"></i></a>
+				</li>
+				<li>积分区<i class="fa fa-database"></i></li>
+				<li>分类<i class="fa fa-cubes"></i></li>
+				<li>
+					<a href="shopcart.html">购物车<i class="fa fa-shopping-cart"></i></a>
+				</li>
+				<li id="grzx">个人中心<i class="fa fa-user-o"></i></li>
+			</ul>
+		</div>
+
+		<script>
+			var mySwiper = new Swiper('.swiper-container', {
+				direction: 'vertical',
+				loop: true,
+				autoplay: 2000,
+			})
+			var index = location.search.replace("_", "");
+			var index = index.split('=');
+			var name = index[1];
+			$('#username').text(index[1] + "您好！");
+
+			if(name == 'undefined') {
+				$('#username').text('请登录');
+			}
+			$('#username').on('touchstart', function(){
+				window.location.href = "login.html"
+			})
+			$('#grzx').on('touchstart', function() {
+				window.location.href = "user.html" + "?" + "username=" + name;
+			})
+		</script>
+	</body>
+
+</html>

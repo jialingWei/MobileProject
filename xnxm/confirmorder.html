@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximun-scale= 1.0, minimun-scale= 1.0, user-scalable=1">
+		<title></title>
+		<link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="libs/css/confirmorder.css">
+		<script src="libs/jquery/jquery-2.1.1.min.js"></script>
+		<script src="libs/angular.min.js"></script>
+	</head>
+	<body ng-app='confirmorderapp' ng-controller='confirmordercontroller'>
+		<div id="header">
+			<span>确认下单</span><i class="fa fa-list-ul" id="list-ul"></i>
+		</div>
+		<div class="content">
+			<div class="address">
+				<div><i class='fa fa-location-arrow'></i></div>
+				<div>
+					<p><a>张三 132213284</a></p>
+					<p><a>广西贵港市覃塘区东龙镇</a></p>
+				</div>
+				<div><a><i class="fa fa-angle-right"></i></a></div>
+			</div>
+			<a class="addaddress"><i class="fa fa-plus-circle"></i>添加收货地址</a>
+			<div class="shopcartlist">
+				
+				<div class="productlist" ng-repeat="m in orderlist">
+					<div class="shopname" ng-bind='m.store'>店铺</div>
+					<div class="item-img"><a href="#"><img src='image/54.jpg'/></a></div>
+					<a class="item-content"><p ng-bind='m.productdatails'></p><p ng-bind='m.productprice'>$123</p></a>
+					<div class="item-sl" ng-bind='m.productcount'></div>
+				</div>
+				<div class="list-group">
+					<div class="list-group-item">
+						<div>配送方式</div>
+						<div>快递免邮</div>
+					</div>
+					<div class="list-group-item">
+						<div>发票抬头</div>
+						<div><input type="text" placeholder="请输入发票抬头"></div>
+					</div>
+					<div class="list-group-item">
+						<div>买家留言</div>
+						<div><input type="text" placeholder="选填"></div>
+					</div>
+					<div class="list-group-item">
+						共4件商品
+					</div>
+				</div>
+			</div>
+			<div class="list-group1">
+				<div class="jf">使用积分</div>
+				
+				<div class="zhifu">
+					<div>支付方式</div>
+					<div>余额支付</div>
+				</div>
+			</div>
+		</div>
+		<div id="footer">
+			<ul>
+				<li>共8件</li>
+				<li><a href="orderlist.html">提交订单</li>
+			</ul>
+		</div>
+	</body>
+	<script>
+		var confirmorderapp = angular.module('confirmorderapp', []);
+		confirmorderapp.controller('confirmordercontroller', ['$scope', '$http', function($scope, $http) {
+			$http.post('libs/PHP/orderlist.php',{
+				
+			}).success(function(res){
+				$scope.orderlist=res.messagetrue;
+			
+			})
+		}])
+		
+	</script>
+</html>

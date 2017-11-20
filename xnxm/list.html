@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<title></title>
+		<link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css" />
+		<!--<link rel="stylesheet" href="libs/css/common.min.css" />-->
+		<link rel="stylesheet" href="libs/css/list.css" />
+		<script src="libs/jquery/jquery-2.1.1.min.js"></script>
+		<script src="libs/iscroll-5.1.3/build/iscroll-probe.js"></script>
+		<script src="libs/js/commonbaseurl.js"></script>
+	</head>
+
+	<body onload="load()">
+		<div id="header">
+			<span>wjl女装专场</span><i class="fa fa-list-ul" id="list-ul"></i>
+		</div>
+		<div id='headerone'>
+			<span id="zfl">分类<i class="fa fa-caret-down"></i></span>
+			<span id="pp">品牌<i class="fa fa-caret-down"></i></span>
+			<span id="jg">价格排序<i class="fa fa-caret-down"></i></span>
+		</div>
+		<div id="wrapper">
+			<div id="scroller">
+				<div id="pullDown" class="">
+					<div class="pullDownLabel"></div>
+				</div>
+				<div class="pulldown-tips">下拉刷新</div>
+				<ul id="list" class="oul">
+				</ul>
+				<div id="pullUp" class="">
+					<div class="pullUpLabel">加载更多</div>
+				</div>
+			</div>
+		</div>
+		<div id="footer">
+			<ul>
+				<li>首页<i class="fa fa-home fa-fw"></i></li>
+				<li>积分区<i class="fa fa-database"></i></li>
+				<li>分类<i class="fa fa-cubes"></i></li>
+				<li>购物车<i class="fa fa-shopping-cart"></i></li>
+				<li>个人中心<i class="fa fa-user-o"></i></li>
+			</ul>
+		</div>
+
+		<div class="navmorelist" id="navmorelist">
+			<ul class="f14">
+				<li>
+					<a href="index.html">首页</a>
+				</li>
+				<li>
+					<a href="liebiao.html">分类查询</a>
+				</li>
+				<li>
+					<a href="shopcar.html">购 物 车</a>
+				</li>
+				<li>
+					<a href="#">会员中心</a>
+				</li>
+			</ul>
+		</div>
+		<!--分类-->
+		<div id="fenlei">
+			<ul class="fenlei1">
+				<li>分类1</li>
+				<li>分类2</li>
+				<li>分类3</li>
+				<li>分类4</li>
+				<li>分类5</li>
+				<li>分类6</li>
+			</ul>
+			<ul class="fenlei2">
+				<li>分类1-1</li>
+				<li>分类1-2</li>
+			</ul>
+			<ul class="fenlei3">
+				<li>分类2-1</li>
+				<li>分类2-1</li>
+			</ul>
+		</div>
+
+	</body>
+	<script type="text/javascript">
+		var $navmorelist = $('.navmorelist');
+		var $listul = $('#list-ul');
+		var xx = true;
+		$listul.on('touchstart', function() {
+			console.log(123);
+			if(xx) {
+				$navmorelist.show();
+			} else {
+				$navmorelist.hide();
+			}
+			xx = !xx;
+		})
+		var $zfl = $('#zfl');
+		var $pp = $('#pp');
+		var $jg = $('#jg');
+		$('.fenlei2').css('display', 'none');
+		$('.fenlei3').css('display', 'none');
+
+		$zfl.on('touchstart', function() {
+			$('#wrapper').toggle();
+		})
+		$('.fenlei1>li').each(function(idx, val) {
+			$(val).on('touchstart', function() {
+				$('.fenlei2').css('display', 'block');
+
+			})
+		})
+		$('.fenlei2>li').each(function(idx, val) {
+			$(val).on('touchstart', function() {
+
+				$('.fenlei3').css('display', 'block');
+			})
+		})
+
+		function load() {
+			$.post(baseurl+"xnxm/libs/PHP/list.php", function(response) {
+				if(response.state) {
+					var a = response.messagetrue;
+					$.each(a, function(index, val) {
+							if(index < 12) {
+								var $li = $('<li><a href="details.html?=' + index + '"><img class="lazy" src="' + val.productimage + '"/></a><div class="jies">' + val.productdetails + '</div><div class="price">' + val.productprice + '</div></li>');
+								$li.appendTo($('.oul'));
+							}
+					})						 
+				} else {
+					$.alert(response.message);
+				}
+			}, 'json');
+
+			var myScroll,
+				pullDown = $("#pullDown"),
+				pullUp = $("#pullUp"),
+				pullDownLabel = $(".pullDownLabel"),
+				pullUpLabel = $(".pullUpLabel"),
+				container = $('#list'),
+				loadingStep = 0; //加载状态0默认，1显示加载状态，2执行加载数据，只有当为0时才能再次加载，这是防止过快拉动刷新  
+			var ii = 0;
+			var i = 12;
+			var cz = 12;
+			pullDown.hide();
+			pullUp.hide();
+			myScroll = new IScroll("#wrapper", {
+				scrollbars: true,
+				mouseWheel: true,
+				interactiveScrollbars: true,
+				shrinkScrollbars: 'scale',
+				fadeScrollbars: true,
+				scrollY: true,
+				click: true,
+				probeType: 2,
+				bindToWrapper: true
+			});
+			myScroll.on("scroll", function() {
+				console.log(this.y);
+				console.log(this.maxScrollY);
+				if(loadingStep == 0 && !pullDown.attr("class").match('refresh|loading') && !pullUp.attr("class").match('refresh')) {
+					if(this.y >= 0) { //下拉刷新操作  
+						$(".pulldown-tips").hide();
+						pullDown.addClass("refresh").show();
+						pullDownLabel.text("松手刷新数据");
+						loadingStep = 1;
+						myScroll.refresh();
+					} else if(this.y < (this.maxScrollY)) { //上拉加载更多  
+						//$(".pullUpLabel").hide(); 
+						pullUp.addClass("refresh").show();
+						pullUpLabel.text("正在载入");
+						loadingStep = 1;
+						pullUpAction();
+					}
+				}
+			});
+			myScroll.on("scrollEnd", function() {
+				if(loadingStep == 1) {
+					if(pullDown.attr("class").match("refresh")) { //下拉刷新操作  
+						pullDown.removeClass("refresh").addClass("loading");
+						pullDownLabel.text("正在刷新");
+						//pullUp.removeClass("refresh").addClass("loading"); 
+						//pullUp.text("正在刷新"); 
+						loadingStep = 2;
+						pullDownAction();
+					}
+				}
+			});
+
+			function pullDownAction() {
+				setTimeout(function() {
+					$.post(baseurl+"xnxm/libs/PHP/list.php", function(response) {
+						if(response.state) {
+							console.log(response);
+							var a = response.messagetrue;
+							for(var j = 13; j < 17; j++) {
+								var n = i++;
+								var cz1 = cz++;
+								var $li = $('<li><a href="details.html?=' + cz1 + '"><img class="lazy" src="' + a[n].productimage + '"/></a><div class="jies">' + a[n].productdetails + '</div><div class="price">' + a[n].productprice + '</div></li>');
+								$('.oul').prepend($li);
+							}
+							pullDown.attr('class', '').hide();
+							myScroll.refresh();
+							loadingStep = 0;
+							$(".pulldown-tips").show();
+						} else {
+							$.alert(response.message);
+						}
+					}, 'json');
+				}, 1000);
+			}
+
+			function pullUpAction() {
+				setTimeout(function() {
+					$.post(baseurl+"xnxm/libs/PHP/list.php", function(response) {
+						if(response.state) {
+							console.log(response);
+							var a = response.messagetrue;
+							for(var j = 13; j < 17; j++) {
+								var n = i++;
+								var cz1 = cz++;
+								var $li = $('<li><a href="details.html?=' + cz1 + '"><img class="lazy" src="' + a[n].productimage + '"/></a><div class="jies">' + a[n].productdetails + '</div><div class="price">' + a[n].productprice + '</div></li>');
+								$('.oul').append($li);
+							}
+							pullUp.attr('class', '').hide();
+							myScroll.refresh();
+							loadingStep = 0;
+							$('.pullUpLabel').show();
+						} else {
+							$.alert(response.message);
+						}
+					}, 'json');
+				}, 1000);
+			}
+			document.addEventListener('touchmove', function(e) {
+				e.preventDefault();
+			}, false);
+		}
+	</script>
+
+</html>

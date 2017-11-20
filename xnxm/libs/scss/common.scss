@@ -1,0 +1,8 @@
+$commonBg:mediumpurple;
+
+html, body{width: 100%; height: 100%;}
+*{margin: 0; padding: 0; list-style: none;text-decoration: none;}
+
+.header{position: fixed; top: 0; left: 0; right: 0; height: 48px; background-color: $commonBg;}
+.footer{position: fixed; bottom: 0; left: 0; right: 0; height: 48px;background-color: $commonBg;}
+.content{position: fixed; top: 48px; bottom: 48px; left: 0; right: 0;width: 100%;} 

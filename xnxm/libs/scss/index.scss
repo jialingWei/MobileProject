@@ -1,0 +1,141 @@
+@import 'common';
+$indexBg: #286090;
+.header{
+>div:nth-child(1){
+      position:absolute;top:0px;left:0px;bottom: 0px;width: 90%;text-align: center;line-height: 48px;
+} 
+>div:nth-child(2){
+       position:absolute;top:0px;right:0px;bottom: 0px;width: 20px;
+       >a{ position:absolute;top:0px;right:0px;bottom: 0px;width: 20px;line-height: 46px;
+       }
+}
+}
+.content{
+    overflow:auto;
+    
+        >.swiper-container{width: 100%; height: 100px; background-color: $indexBg; overflow: hidden;}
+        >.tu1{width:100%;top:100px;left: 0;right: 0;>img{display:inline-block;width: 100%;}}
+        >.tu2{width:100%;top:200px;left: 0;right: 0;>img{display:inline-block;width: 100%; height:155px;}}
+        >.tu3{
+         position: absolute;width: 100%;top:458px;height:105px;
+         >img:nth-child(1){position:absolute; top: 0px;left: 0px; bottom: 0px;width: 50%;}
+         >img:nth-child(2){position: absolute; top: 0px;right: 0px; bottom: 0px;width: 50%;}
+         }
+        >.tu4{
+            position: absolute;width: 100%;top:562px;height:105px;
+            >img:nth-child(1){position:absolute; top: 0px;left: 0px; bottom: 0px;width: 50%;}
+            >img:nth-child(2){position: absolute; top: 0px;right: 0px; bottom: 0px;width: 50%;}
+        }
+        >.tu5{
+            position: absolute;width: 100%;top:666px;height:105px;
+            >img:nth-child(1){position:absolute; top: 0px;left: 0px; bottom: 0px;width: 50%;}
+            >img:nth-child(2){position: absolute; top: 0px;right: 0px; bottom: 0px;width: 50%;}
+        }
+        >.tu6{
+            position: absolute;width: 100%;top:770px;height:105px;
+            >img:nth-child(1){position:absolute; top: 0px;left: 0px; bottom: 0px;width: 50%;}
+            >img:nth-child(2){position: absolute; top: 0px;right: 0px; bottom: 0px;width: 50%;}
+        }
+        >.tu7{
+            position: absolute;width: 100%;top:872px;height:105px;
+            >img:nth-child(1){position:absolute; top: 0px;left: 0px; bottom: 0px;width: 50%;}
+            >img:nth-child(2){position: absolute; top: 0px;right: 0px; bottom: 0px;width: 50%;}
+            
+        }
+        >.oul{
+            position: absolute;width: 100%;top:975px;
+            >li{
+                >a{
+                    >img{display:inline-block;width: 100%;}
+                }
+            }
+           
+        } 
+        >.scrolltop {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            background-color: #e80080;
+            position: fixed;
+            right: 15px;
+            bottom: 60px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 20px;
+            color: #fff;
+            opacity: 0.7;
+//          display: none;
+           } 
+       
+}
+.footer{
+   
+   >ul{
+//     width:100%; height:48px;display: -webkit-box;
+   >li{width:25%; height:48px;float: left; line-height: 48px;text-align: center;}
+   }
+}
+.search-content{
+    width: 100%;position: fixed;top: 0;right: 0;bottom: 0;left: 0;z-index: 1000;background-color: #fff;
+    >.search-bar {
+        width: 100%;
+        height: 48px;
+        line-height: 48px;
+        padding: 0 10px;
+        position: relative;
+        background-color: #8E488E;
+        >div {
+            height: 100%;
+            position: absolute;
+            left: 40px;
+            right: 40px;
+            line-height: 48px;
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            }
+        >a:last-child {
+            display: block;
+            position: absolute;
+            right: 40px;
+            top: 0;
+            }
+        
+        }
+    >div.input-group {
+        width: 100%;
+        padding: 10px 15px;
+        position: relative;
+        display: table;
+        border-collapse: separate;
+    >span:first-child {
+        color: #aaa;
+        border-radius: 6px 0 0 6px;
+        }
+    >input {
+        border-left: none;
+        box-shadow: none;
+        outline: none;
+        border-color: #E5E6E7;
+    }
+    >span:last-child {
+        border-radius: 0 6px 6px 0;
+        border-left: 0;
+    }
+    >.input-group-addon {
+        background-color: #fff;
+        border: 1px solid #E5E6E7;
+        border-radius: 1px;
+        color: inherit;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 1;
+        padding: 6px 12px;
+        text-align: center;
+    }
+    
+    
+    
+    }
+    }
+

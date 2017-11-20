@@ -1,0 +1,118 @@
+.header> span:nth-child(1) {
+	position: absolute;
+	display: block;
+	top: 0px;
+	left: 0px;
+	height: 48px;
+	line-height: 48px;
+	width: 90%;
+	text-align: center;
+}
+
+.header> i {
+	position: absolute;
+	display: block;
+	top: 0px;
+	right: 0px;
+	height: 48px;
+	width: 10%;
+	line-height: 48px;
+	text-align: center;
+}
+
+.content> form ul {
+	padding: 0;
+	height: 34px;
+	line-height: 34px;
+	width: 98%;
+	position: relative;
+	margin-bottom: 3%;
+}
+.btn {
+  width: 20%;
+  margin-left: 37%;
+  background-color: #d7626e;  
+  border: 1px solid #471335;
+  text-align: center;
+  line-height: 34px;
+  border-radius: 8%;
+  }
+  
+.content> form ul> li {
+	padding-left: 3%;
+	height: 100%;
+}
+
+.content> form ul> li> input {
+	width: 100%;
+	height: 34px;
+	border: 1px solid #c69298;
+	text-indent: 8px;
+}
+
+.content> form ul> .item-relative1 {
+	width: 29%;
+	left: 0;
+	float: left;
+}
+
+.content> form ul> .item-relative2 {
+	width: 68%;
+	right: 0;
+	float: right;
+	padding-left: 0;
+}
+.content> form ul> .item-relative2 > button{
+	width: 101px;
+	height: 36px;
+	background-color: #d7626e;
+}
+
+
+.content> form ul> .btn {
+	width: 100%;
+	background-color: #9370db;
+	border-color: #9370db;
+	text-align: center;
+}
+
+.navmorelist {
+	display: none;
+	width: 126px;
+	position: absolute;
+	top: 44px;
+	right: 10px;
+	background: #484F55;
+	z-index: 350;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	-webkit-transform-origin: 0px 0px 0px;
+	opacity: 0.9;
+	-webkit-transform: scale(1, 1);
+}
+
+.navmorelist> ul> li {
+	border-bottom: 1px solid #5B6166;
+	height: 38px;
+	line-height: 38px;
+	text-align: left;
+	text-indent: 2.5em;
+	background: #484F55;
+}
+
+.navmorelist> ul> li> a {
+	color: white;
+}
+
+.navmorelist:after {
+	content: "";
+	position: absolute;
+	top: -16px;
+	right: 8px;
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-color: transparent transparent #484F55 transparent;
+	border-width: 8px;
+}

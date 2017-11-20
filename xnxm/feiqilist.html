@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	    <meta name="format-detection" content="telephone=no">
+	    <meta name="format-detection" content="email=no">
+		<title></title>
+		<link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="libs/css/common.min.css" />
+		<link rel="stylesheet" href="libs/css/xiangqing.css" />
+		<script src="libs/jquery/jquery-2.1.1.min.js"></script>
+		<script src="libs/angular.min.js"></script>
+		<script src="libs/lazyload/jquery.lazyload.min.js"></script>
+		<!--<script src="libs/js/list.js"></script>-->
+		<script src="libs/iscroll-5.1.3/build/iscroll.js"></script>
+		<script src="libs/js/common.js"></script>
+		
+	</head>
+	<body ng-app='listapp' ng-controller='listcontroller'>
+		<div class="header"><span>玖姿JUZUI女装专场</span><i class="fa fa-list-ul" id="list-ul"></i></div>
+		<div class="content" id="wrapper">
+			<div><span>分类<i class="fa fa-caret-down"></i></span><span>品牌<i class="fa fa-caret-down"></i></span><span>价格排序<i class="fa fa-caret-down"></i></span></div>
+			
+			<ul class="oul" id="scroller">				
+			</ul>
+		</div>
+		<div class="footer">
+			<ul>
+    			<li>首页<i class="fa fa-home fa-fw"></i></li>
+    			<li>积分区<i class="fa fa-database"></i></li>
+    			<li>分类<i class="fa fa-cubes"></i></li>
+    			<li>购物车<i class="fa fa-shopping-cart"></i></li>
+    			<li>个人中心<i class="fa fa-user-o"></i></li>
+    		</ul>
+		</div>
+		
+		
+		<div class="navmorelist" id="navmorelist">
+			<ul class="f14">
+				<li><a href="index.html">首页</a></li>
+				<li><a href="liebiao.html">分类查询</a></li>
+				<li><a href="shopcar.html">购 物 车</a></li>
+				<li><a href="#">会员中心</a></li>
+			</ul>
+		</div>		
+		<script>
+			$(function(){   	
+		      $("img.lazy").lazyload({
+		      	effect: "fadeIn",
+		      	threshold: 200,
+		      });		  	
+		    })
+			var listapp=angular.module('listapp',['commonApp']);
+			listapp.controller('listcontroller',['$scope','$http',function($scope,$http){
+				$http.post("libs/PHP/list.php",{						
+				}).success(function(response){
+						if(response.state){
+							 console.log(response.messagetrue);
+							 var a=response.messagetrue;
+							 $.each(a,function(index,val){
+							 	var $li=$('<li><a href="details.html?='+index+'"><img class="lazy" src="'+ val.productimage +'"/></a><div class="jies">'+val.productdetails+'</div><div class="price">'+val.productprice+'</div></li>');					
+							 	$li.appendTo($('.oul'));
+							 })
+//							 var productimage=val.productimage;
+							 
+						}else{
+							$.alert(response.message);
+						}
+					})
+			var $navmorelist=$('.navmorelist');
+			var $listul=$('#list-ul');
+			var xx=true;
+			$listul.on('click',function(){
+				console.log(123);
+				
+				if(xx)
+				{
+					$navmorelist.show();
+				}else{
+					$navmorelist.hide();
+				}
+				xx=!xx;
+			})	
+			}])
+		</script>
+	</body>
+</html>

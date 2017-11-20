@@ -1,0 +1,14 @@
+{
+	"result": [
+	{"id":"1","src": "image/54.jpg","title":"斯文印花黑灰色短袖连衣裙1","price":"120"},  
+   	{"id":"2","src": "image/55.jpg","title":"斯文印花黑灰色短袖连衣裙2","price":"124"},  
+    {"id":"3","src": "image/56.jpg","title":"斯文印花黑灰色短袖连衣裙3","price":"110"},  
+    {"id":"4","src": "image/55.jpg","title":"斯文印花黑灰色短袖连衣裙4","price":"124"},  
+    {"id":"5","src": "image/54.jpg","title":"斯文印花黑灰色短袖连衣裙5","price":"125"},  
+    {"id":"6","src": "image/56.jpg","title":"斯文印花黑灰色短袖连衣裙6","price":"127"},  
+    {"id":"7","src": "image/54.jpg","title":"斯文印花黑灰色短袖连衣裙7","price":"128"},  
+    {"id":"8","src": "image/55.jpg","title":"斯文印花黑灰色短袖连衣裙8","price":"129"},  
+    {"id":"9","src": "image/56.jpg","title":"斯文印花黑灰色短袖连衣裙9","price":"130"}, 
+    {"id":"10","src": "image/54.jpg","title":"斯文印花黑灰色短袖连衣裙10","price":"131"}
+   ]
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximun-scale= 1.0, minimun-scale= 1.0, user-scalable=1">
+		<title></title>
+		<link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="libs/css/orderlist.css">
+		<script src="libs/jquery/jquery-2.1.1.min.js"></script>
+		<script src="libs/angular.min.js"></script>
+		<script src="libs/js/commonbaseurl.js"></script>
+	</head>
+	<body ng-app='orderlistapp' ng-controller='orderlistcontroller'>
+		<div id="header">
+			<span>wjl女装专场</span><i class="fa fa-list-ul" id="list-ul"></i>
+		</div>
+		<div id="headerone">
+			<span id="qb">全部<i class="fa fa-caret-down"></i></span>
+			<span id="dfk">待付款<i class="fa fa-caret-down"></i></span>
+			<span id="dfh">待发货<i class="fa fa-caret-down"></i></span>
+			<span id="dsh">待收货<i class="fa fa-caret-down"></i></span>
+			<span id="dpj">待评价<i class="fa fa-caret-down"></i></span>
+		</div>
+		<div id="wrapper">
+			<div class="order-item"  ng-repeat="m in orderlist">
+				<div class="shopname">
+					<div class="shopname_one" ng-bind='m.store'></div>
+					<div class="shopname_two" ng-bind='statename'></div>
+				</div>
+				<div class="product-content">
+					<div class="product-content_one">
+						<div class="item-img"><a href="#"><img src='image/54.jpg'/></a></div>
+						<a class="item-content"><p ng-bind='m.productdatails'></p><p ng-bind='m.productprice'>$123</p></a>
+						<div class="item-sl" ng-bind='m.productcount'></div>
+					</div>
+				</div>
+				<div class="total"><span>共1商品，合计：￥100</span></div>
+				<div class="totaldd"><a>付款</a><a>删除订单</a><a>查看物流</a></div>
+			</div>
+		</div>
+		<div id="footer">
+			<ul>
+				<li>
+					<a href="index.html">首页<i class="fa fa-home fa-fw"></i></a>
+					
+				</li>
+				<li><a href="#">积分区</a><i class="fa fa-database"></i></li>
+				<li><a href="#">分类</a><i class="fa fa-cubes"></i></li>
+				<li><a href="shopcart.html">购物车</a><i class="fa fa-shopping-cart"></i></li>
+				<li><a href="user.html">个人中心</a><i class="fa fa-user-o"></i></li>
+			</ul>
+		</div>
+	</body>
+	<script>
+		var orderlistapp = angular.module('orderlistapp', []);
+		orderlistapp.controller('orderlistcontroller', ['$scope', '$http', function($scope, $http) {
+			$http.post(baseurl+'xnxm/libs/PHP/orderlist.php',{
+				
+			}).success(function(resopnse){
+				$scope.orderlist=resopnse.messagetrue;
+				console.log(resopnse.messagetrue);
+			})
+		}])
+	</script>
+</html>

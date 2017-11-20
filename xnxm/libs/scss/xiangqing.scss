@@ -1,0 +1,75 @@
+.header{
+   
+        >span:nth-child(1){position: absolute;display: block;top:0px;left: 0px;height: 48px;line-height: 48px;width: 90%;text-align: center;}
+        >i{position:absolute;display:block;top: 0px;right: 0px; height: 48px;width: 10%;line-height: 48px; text-align: center;}   
+}
+.content{
+    
+    >div{
+        top:48px; left: 0px; right: 0px;height: 48px;background-color: antiquewhite;
+        >span{display: inline-block;width: 33%;height: 48px;line-height: 48px;text-align: center;}
+//      >span:nth-child(1){padding-left: 20px;}
+    }
+    >ul{
+        overflow: auto; width: 100%;height: 100%;
+        >li{
+            
+                height: 220px;background-color: #fbf6f6;width: 50%;float: left;display: block;
+                >a{
+                    display:block;height: 170px;margin: 10px auto; width: 100%;
+                     >img{width:100%; height: 100%; border-radius: 4px;vertical-align: middle;min-width:1;}
+                }
+                >.jies{width: 100%;height: 22px;line-height: 22px;font-size: 9px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+                >.price{width: 100%;height: 22px;line-height: 22px;font-size: 9px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+               
+        }
+    }
+}
+.footer{
+   
+   >ul{
+//     width:100%; height:48px;display: -webkit-box;
+   >li{width:25%; height:48px;float: left; line-height: 48px;text-align: center;}
+   }
+}
+
+//弹窗
+
+.navmorelist {
+    display:none;
+    width: 126px;
+    position: absolute;
+    top: 44px;
+    right: 10px;
+    background: #484F55;
+    z-index: 350;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-transform-origin: 0px 0px 0px;
+    opacity: 0.9;
+    -webkit-transform: scale(1, 1);
+    >ul>li {
+        border-bottom: 1px solid #5B6166;
+        height: 38px;
+        line-height: 38px;
+        text-align: left;
+        text-indent: 2.5em;
+        background: #484F55;
+        >a{color: white;}
+    }
+}
+.navmorelist:after {
+    content: "";
+    position: absolute;
+    top: -16px;
+    right: 8px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent transparent #484F55 transparent;
+    border-width: 8px;
+}
+
+
+

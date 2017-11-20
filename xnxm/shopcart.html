@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximun-scale= 1.0, minimun-scale= 1.0, user-scalable=1">
+		<title></title>
+		<link rel="stylesheet" href="libs/css/common.min.css" />
+		<link rel="stylesheet" href="libs/css/shopcart.min.css" />
+		<link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="libs/jquery-confirm/jquery-confirm.css">
+		<script src="libs/jquery/jquery-2.1.1.min.js"></script>
+		<script src="libs/angular.min.js"></script>
+		<script src="libs/jquery-confirm/jquery-confirm.js"></script>
+		<script src="libs/js/common.js"></script>
+		<script src="libs/lazyload/jquery.lazyload.min.js"></script>
+		<script src="libs/js/commonbaseurl.js"></script>
+
+	</head>
+	<body ng-app='shopcatapp' ng-controller='shopcatcontroller'>
+		<div class="header">
+			<div class="header_1">
+				<a href="javascript:history.back()" class="a1"><i class="fa fa-angle-left"></i></a>
+				<div>
+					<a href="#">购物车</a>
+				</div>
+				<a href="#" class="a2"><i class="fa fa-search"></i></a>
+			</div>
+		</div>
+		<div class="content">
+			<div class="ng-scope">
+				<div class="item-option">
+					<input type="checkbox">
+				</div>
+				<div class="product-img">
+					<a href="#">
+					</a>
+				</div>
+				<div class="product-name">
+					<p></p>
+					<p></p>
+				</div>
+				<div class="item-calc">
+					<div class="col-xs-4">
+						<i class="fa fa-minus"></i>
+					</div>
+					<div class="col-xs-4" class="shuliang"></div>
+					<div class="col-xs-4">
+						<i class="fa fa-plus"></i>
+					</div>
+					<div class="item-trash">
+						<i class="fa fa-trash-o"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<ul>
+				<li><input type="checkbox" class="oinput" value="">全选</li>
+				<li class="shop1">
+					<a href="#"><span>支付方式</span><span class="fa fa-angle-right"></span></a>
+				</li>
+				<li class="count">确认支付：￥
+					<a href="#" style="position: absolute; top:0px; width: 10%; right: 4%;">0</a>
+				</li>
+
+			</ul>
+
+		</div>
+	</body>
+	<script>
+		var index = location.search.replace("_", "");
+		var index = index.split(',');
+		var ss = {};
+		var a = index[1];
+		var $ng_scope = $('.ng-scope');
+		var shopcatapp = angular.module('shopcatapp', ['commonApp']);
+		shopcatapp.controller('shopcatcontroller', ['$scope', '$http', function($scope, $http) {
+			$http.post(baseurl+"xnxm/libs/PHP/shopcartone.php", {}).success(function(response) {
+				if(response.state) {
+					var aa = response.messagetrue;
+					for(var i = 0; i < aa.length; i++) {
+						var clonedom = $ng_scope.eq(0).clone().appendTo($ng_scope.parent());
+						$.each(clonedom, function(idex, val) {
+							$(val).children('div').eq(2).find('p').eq(0).text(aa[i].productdetails);
+							$(val).children('div').eq(2).find('p').eq(1).text(aa[i].productprice);
+							var $img = $('<img src="' + aa[i].productimage + '">');
+							$img.clone().appendTo($(val).children('div').eq(1).find('a'));
+							$(val).children('div').eq(3).find('div').eq(1).text(aa[i].productcount);
+						});
+					}
+					$ng_scope.eq(0).remove();
+					var total = 0;
+					var $pro_del = $('.item-option');
+					$pro_del.each(function(indx, val) {
+						//全选的dom
+						//console.log(this);
+						var $oli = $('.footer>ul>li').eq(0);
+						var $oinput = $('.footer>ul>li').eq(0).children('input[type=checkbox]');
+						var $check = $(val).children('input[type=checkbox]');
+						//点击各个input时计算总钱
+						var prices = $(val).parent('.ng-scope').children('div').eq(2).find('p').eq(1).text();
+						$(val).on("touchstart", function() {
+								var ocount = $(val).parent('.ng-scope').children('div').eq(3).find('div').eq(1).text();							
+								if(!($check.prop('checked'))) {
+									total += prices * ocount;
+								} else {
+									total -= prices * ocount;								
+								}
+								$('.count').find('a').text(total);
+							})
+							//全选js			
+						$oli.on("touchstart", function() {
+							if(!($oinput.prop('checked'))) {
+								$check.prop('checked', true);
+								var prices = $(val).parent('.ng-scope').children('div').eq(2).find('p').eq(1).text();
+								var ocount = $(val).parent('.ng-scope').children('div').eq(3).find('div').eq(1).text();
+								if($check.prop('checked')) {
+									total += prices * ocount;
+									
+								} else {
+									total -= prices * ocount;
+								}
+								$('.count').find('a').text(total);
+							} else {
+								$check.prop('checked', false);
+								total = 0;
+								$('.count').find('a').text(total);
+							}
+						})
+						var $jian = $(val).parent('.ng-scope').children('div').eq(3).find('div').eq(0);
+						$jian.each(function(idx1, val1) {
+							$(val1).on("touchstart", function() {
+								var cout = $(this).next().text();
+								var productdetails2 = $(this).offsetParent('.item-calc').prev('.product-name').find('p').eq(0).text();
+								
+								cout--;
+								if(cout <= 1) {
+									cout = 1;
+									$(this).next().text(cout);
+								}
+								$(this).next().text(cout);
+								if(cout >= 1) {
+									$.post(baseurl+'xnxm/libs/PHP/shopcartcount.php', {
+										productcount: cout,
+										productdetails2: productdetails2
+									}).success(function(response) {
+										$.alert('成功修改购物车！');
+									})
+								}
+								if($check.prop('checked')) {
+									total += prices * cout;
+									$('.count').find('a').text(total);
+								}
+							})
+						})
+						var $jia = $(val).parent('.ng-scope').children('div').eq(3).find('div').eq(2);
+						$jia.each(function(idx1, val1) {
+								$(val1).on("touchstart", function(){
+									var cout = $(this).prev().text();
+									var productdetails3 = $(this).offsetParent('.item-calc').prev('.product-name').find('p').eq(0).text();
+									
+									cout++;
+									$(this).prev().text(cout);
+									$.post(baseurl+'xnxm/libs/PHP/shopcartcount.php', {
+										productcount: cout,
+										productdetails2: productdetails3
+									}).success(function(response) {
+										$.alert('成功修改购物车！');
+									})
+								})
+							})
+							//删除
+						var $dele = $(val).parent('.ng-scope').children('div').eq(3).find('div').eq(3);
+						$dele.each(function(idx3, val3) {
+							$(val3).on("touchstart", function() {
+								var productdetails4 = $(this).offsetParent('.item-calc').prev('.product-name').find('p').eq(0).text();
+								
+								$.post(baseurl+'xnxm/libs/PHP/delshopcart.php', {
+									productdetails4: productdetails4
+								}).success(function(response) {
+									
+									$.alert('删除成功！');
+									window.location.reload();
+								})
+							})
+						})
+					})
+					$('.count').on('touchstart', function() {					
+						var $check = $(this).parents('.footer').prev('.content').find(":checkbox:checked");
+						console.log($check);
+						var arr = [];
+						$check.each(function(idex, val){
+							var price = $(val).parents('.ng-scope').eq(0).find('.product-name').find('p').eq(1).text();
+							var timage = $(val).parents('.ng-scope').eq(0).find('.product-img>a>img').attr('src');
+							var details = $(val).parents('.ng-scope').eq(0).find('.product-name>p').eq(0).text();
+							var count = $(val).parents('.ng-scope').eq(0).find('.item-calc>div').eq(1).text();
+							console.log(count);
+							$http.post(baseurl+'xnxm/libs/PHP/confirmorder.php', {
+								productprice: price,
+								producttimage: timage,
+								productdetails: details,
+								productcount: count
+							}).success(function(res) {
+								window.location.href = 'confirmorder.html';
+							})
+						})
+					})
+
+				} else {
+
+				}
+			})
+
+		}])
+	</script>
+
+</html>

@@ -1,0 +1,43 @@
+.header{
+    >.header_1{
+        position:absolute;width: 100%; top:0px;height: 48px;right: 0px;
+        >.a1{position: absolute;display:block;width: 10%;height: 48px; left: 0px;>i{width:20px;height: 48px;line-height: 48px;}}
+        >div{position: absolute;width: 80%; height: 48px;left: 10%; text-align: center;line-height: 48px;}
+        >.a2,i{position: absolute;display:block;width: 10%;height: 48px; right: 0px;>i{width:20px;height: 48px;line-height: 48px;}}
+    }
+}
+.content{
+    overflow: auto;
+    >.ng-scope{
+        width: 100%; left: 0px;height: 100px;border-bottom: 1px solid #CCCCCC;
+        >.item-option{ width: 5%; left: 5%; height: 100px;position:absolute; line-height: 100px;}
+        >.product-img{ 
+            width: 25%; left:10%; height: 100px;position:absolute;line-height: 100px;
+             >a>img{width: 67px; height: 85px;}
+            }
+        >.product-name{
+            width: 35%; left:35%; height: 100px;position:absolute;margin: 20px auto;
+           
+        }
+        >.item-calc{
+            width: 20%; left:80%;height: 100px;position:absolute;
+            >div{width: 20px; height: 100px;float: left;line-height: 100px;}
+        }
+        >.item-trash {
+                float: right;
+                font-size: 20px;
+            }
+    }
+   
+}
+.footer{
+    border-top: 1px solid #7B0A2E;
+//  border-top-color: #7B0A2E;
+    >ul{
+   >li{width:33%; height:48px;float: left; line-height:48px;text-align: center;}
+   >li:nth-child(1){background-color: white;}
+   >.shop1{background-color: #EB97B4;}
+   }
+   
+}
+

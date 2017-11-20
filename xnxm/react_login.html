@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="libs/jquery-confirm/jquery-confirm.css" />
+		<script src="libs/react.js"></script>
+		<script src="libs/react-dom.js"></script>
+		<script type="text/javascript" src="libs/browser.min.js" ></script>
+		<script src="libs/jquery/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="jquery-confirm/jquery-confirm.js" ></script>
+		
+	</head>
+	<body>
+		 <div id="div2"></div>
+		 <script type="text/babel">
+		 var Reactlogin=React.createClass({			
+		 	click:function(e){		 		
+		 		var self=this;
+		 		var telphone=$('.xuehao').val();
+		 		var password=$('.mima').val();
+			 		$.post(self.props.source,{telphone:telphone,password:password},function(result) {
+	      			if(result.state){	      				
+	      				$.alert('登录成功');
+	      			}
+      		},'json');
+		 	},
+		 	
+		 	render(){					
+				return(
+					<div>
+						<p>
+							<input type="text" className="xuehao"  placeholder="学号"/>
+						</p>
+						<p>
+							<input type="password" className="mima" placeholder="密码"/>
+						</p>
+						<p>
+							<input type="button"  onClick={this.click}/>
+						</p>
+					</div>
+				);
+			}
+		 });
+
+		ReactDOM.render(<Reactlogin source='libs/PHP/login.php'></Reactlogin>,document.getElementById('div2'));
+		</script>
+	
+	</body>
+</html>

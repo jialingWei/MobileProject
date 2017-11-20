@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<title></title>
+		<!--<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />-->
+
+		<script src="libs/jquery/jquery-2.1.1.min.js"></script>
+		<script src="libs/iscroll-5.1.3/build/iscroll-probe.js"></script>
+		<style>
+			body,
+			html {
+				width: 100%;
+				height: 100%
+			}
+			
+			.footer,
+			.header {
+				height: 48px;
+				background-color: #CD235C;
+				position: fixed;
+				left: 0;
+				right: 0
+			}
+			
+			* {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				text-decoration: none
+			}
+			
+			.header {
+				top: 0
+			}
+			
+			.footer {
+				bottom: 0
+			}
+			
+			.content {
+				position: fixed;
+				top: 48px;
+				bottom: 48px;
+				left: 0;
+				right: 0;
+				width: 100%
+			}
+			
+			* {
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+			}
+			
+			html {
+				-ms-touch-action: none;
+			}
+			
+			body,
+			ul,
+			li {
+				padding: 0;
+				margin: 0;
+				border: 0;
+			}
+			
+			body {
+				font-size: 12px;
+				font-family: ubuntu, helvetica, arial;
+				overflow: hidden;
+				/* this is important to prevent the whole page to bounce */
+			}
+			
+			#header {
+				/*position: absolute;*/
+				z-index: 2;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 45px;
+				line-height: 45px;
+				background: #CD235C;
+				padding: 0;
+				color: #eee;
+				font-size: 20px;
+				text-align: center;
+				font-weight: bold;
+			}
+			
+			#header> span:nth-child(1) {
+				position: absolute;
+				display: block;
+				top: 0px;
+				left: 0px;
+				height: 48px;
+				line-height: 48px;
+				width: 90%;
+				text-align: center;
+			}
+			
+			#header> i {
+				position: absolute;
+				display: block;
+				top: 0px;
+				right: 0px;
+				height: 48px;
+				width: 10%;
+				line-height: 48px;
+				text-align: center;
+			}
+			
+			#headerone {
+				top: 48px;
+				left: 0px;
+				right: 0px;
+				height: 48px;
+				background-color: antiquewhite;
+			}
+			
+			#headerone span {
+				display: inline-block;
+				width: 32%;
+				height: 48px;
+				line-height: 48px;
+				text-align: center;
+				font-size: 14px;
+				color: #b36565;
+			}
+			
+			#footer {
+				position: absolute;
+				z-index: 2;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 48px;
+				background: #4a3232;
+				padding: 0;
+				border-top: 1px solid #444;
+			}
+			
+			#footer> ul> li {
+				width: 25%;
+				height: 48px;
+				float: left;
+				line-height: 48px;
+				text-align: center;
+				color: #e4cdcd;
+				font-size: 14px;
+			}
+			
+			#wrapper {
+				position: absolute;
+				z-index: 1;
+				top: 90px;
+				bottom: 48px;
+				left: 0;
+				width: 100%;
+				background: #ccc;
+				overflow: auto;
+			}
+			
+			#scroller {
+				position: absolute;
+				z-index: 1;
+				-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+				width: 100%;
+				-webkit-transform: translateZ(0);
+				-moz-transform: translateZ(0);
+				-ms-transform: translateZ(0);
+				-o-transform: translateZ(0);
+				transform: translateZ(0);
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				-webkit-text-size-adjust: none;
+				-moz-text-size-adjust: none;
+				-ms-text-size-adjust: none;
+				-o-text-size-adjust: none;
+				text-size-adjust: none;
+			}
+			
+			#scroller ul {
+				position: relative;
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				width: 100%;
+				text-align: left;
+			}
+			
+			#scroller li {
+				/* padding: 10px;*/
+				/*overflow: hidden;*/
+				height: 220px;
+				background-color: #fbf6f6;
+				/*margin: 2px;*/
+				width: 50%;
+				float: left;
+				display: block;
+			}
+			
+			#scroller li a {
+				display: block;
+				height: 170px;
+				margin: 10px auto;
+				width: 100%;
+				text-align: center;
+			}
+			
+			#scroller li a img {
+				width: 90%;
+				/*height: 162px;*/
+				height: 100%;
+				border-radius: 4px;
+				vertical-align: middle;
+				min-width: 1;
+			}
+			
+			#pullDown,
+			#pullUp,
+			.pulldown-tips {
+				height: 40px;
+				line-height: 40px;
+				text-align: center;
+			}
+			
+			.pulldown-tips {
+				position: absolute;
+				top: -40px;
+				left: 0;
+				width: 100%;
+			}
+			
+			.navmorelist {
+				display: none;
+				width: 126px;
+				position: absolute;
+				top: 44px;
+				right: 10px;
+				background: #484F55;
+				z-index: 350;
+				border: 1px solid transparent;
+				border-radius: 4px;
+				-webkit-transform-origin: 0px 0px 0px;
+				opacity: 0.9;
+				-webkit-transform: scale(1, 1);
+			}
+			
+			.navmorelist> ul> li {
+				border-bottom: 1px solid #5B6166;
+				height: 38px;
+				line-height: 38px;
+				text-align: left;
+				text-indent: 2.5em;
+				background: #484F55;
+			}
+			
+			.navmorelist> ul> li> a {
+				color: white;
+			}
+			
+			.navmorelist:after {
+				content: "";
+				position: absolute;
+				top: -16px;
+				right: 8px;
+				display: inline-block;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-color: transparent transparent #484F55 transparent;
+				border-width: 8px;
+			}
+		</style>
+	</head>
+<body onload="load()">
+		<div id="header">
+			<span>wjl女装专场</span><i class="fa fa-list-ul" id="list-ul"></i>
+		</div>
+		<div id='headerone'>
+			<span>分类<i class="fa fa-caret-down"></i></span>
+			<span>品牌<i class="fa fa-caret-down"></i></span>
+			<span>价格排序<i class="fa fa-caret-down"></i></span>
+		</div>
+		<div id="wrapper">
+			<div id="scroller">
+				<div id="pullDown" class="">
+					<div class="pullDownLabel"></div>
+				</div>
+				<div class="pulldown-tips">下拉刷新</div>
+				<ul id="list" class="oul">
+				</ul>
+				<div id="pullUp" class="">
+					<div class="pullUpLabel">加载更多</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="footer">
+			<ul>
+				<li>首页<i class="fa fa-home fa-fw"></i></li>
+				<li>积分区<i class="fa fa-database"></i></li>
+				<li>分类<i class="fa fa-cubes"></i></li>
+				<li>购物车<i class="fa fa-shopping-cart"></i></li>
+				<li>个人中心<i class="fa fa-user-o"></i></li>
+			</ul>
+		</div>
+
+		<div class="navmorelist" id="navmorelist">
+			<ul class="f14">
+				<li>
+					<a href="index.html">首页</a>
+				</li>
+				<li>
+					<a href="liebiao.html">分类查询</a>
+				</li>
+				<li>
+					<a href="shopcar.html">购 物 车</a>
+				</li>
+				<li>
+					<a href="#">会员中心</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var $navmorelist = $('.navmorelist');
+		var $listul = $('#list-ul');
+		var xx = true;
+		$listul.on('click', function() {
+			console.log(123);
+
+			if(xx) {
+				$navmorelist.show();
+			} else {
+				$navmorelist.hide();
+			}
+			xx = !xx;
+		})
+
+		function load() {
+			$.post("libs/PHP/list.php", function(response) {
+				console.log(response);
+
+				if(response.state) {
+
+					console.log('//')
+					var a = response.messagetrue;
+					$.each(a, function(index, val) {
+							if(index < 12) {
+								var $li = $('<li><a href="details.html?=' + index + '"><img class="lazy" src="' + val.productimage + '"/></a><div class="jies">' + val.productdetails + '</div><div class="price">' + val.productprice + '</div></li>');
+								$li.appendTo($('.oul'));
+							}
+
+						})
+						//							 var productimage=val.productimage;							 
+				} else {
+					$.alert(response.message);
+				}
+			}, 'json');
+
+			var myScroll,
+				pullDown = $("#pullDown"),
+				pullUp = $("#pullUp"),
+				pullDownLabel = $(".pullDownLabel"),
+				pullUpLabel = $(".pullUpLabel"),
+				container = $('#list'),
+				loadingStep = 0; //加载状态0默认，1显示加载状态，2执行加载数据，只有当为0时才能再次加载，这是防止过快拉动刷新  
+			var ii = 0;
+			var i = 12;
+			var cz = 12;
+			pullDown.hide();
+			pullUp.hide();
+			myScroll = new IScroll("#wrapper", {
+				scrollbars: true,
+				mouseWheel: true,
+				interactiveScrollbars: true,
+				shrinkScrollbars: 'scale',
+				fadeScrollbars: true,
+				//              scrollY:true,
+				click: true,
+				probeType: 3,
+				//              bindToWrapper:true  
+			});
+			myScroll.on("scroll", function() {
+//				console.log(this.y);
+				console.log(this.maxScrollY)
+				if(loadingStep == 0 && !pullDown.attr("class").match('refresh|loading') && !pullUp.attr("class").match('refresh')) {
+					if(this.y >=0) { //下拉刷新操作  
+
+						$(".pulldown-tips").hide();
+						pullDown.addClass("refresh").show();
+						pullDownLabel.text("松手刷新数据");
+						loadingStep = 1;
+						myScroll.refresh();
+					} else if(this.y < (this.maxScrollY - 14)) { //上拉加载更多  
+						pullUp.addClass("refresh").show();
+						pullUpLabel.text("正在载入");
+						loadingStep = 1;
+						pullUpAction();
+					}
+				}
+			});
+			myScroll.on("scrollEnd", function() {
+				if(loadingStep == 1) {
+					if(pullDown.attr("class").match("refresh")) { //下拉刷新操作  
+						pullDown.removeClass("refresh").addClass("loading");
+						pullDownLabel.text("正在刷新");
+						loadingStep = 2;
+						console.log(5676586);
+						pullDownAction();
+					}
+				}
+			});
+
+			function pullDownAction() {
+				setTimeout(function() {
+					$.post("libs/PHP/list.php", function(response) {
+						if(response.state) {
+							console.log(response);
+							var a = response.messagetrue;
+							for(var j = 13; j < 17; j++) {
+								var n = i++;
+								var cz1 = cz++;
+								var $li = $('<li><a href="details.html?=' + cz1 + '"><img class="lazy" src="' + a[n].productimage + '"/></a><div class="jies">' + a[n].productdetails + '</div><div class="price">' + a[n].productprice + '</div></li>');
+								$('.oul').prepend($li);
+							}
+							pullDown.attr('class', '').hide();
+							myScroll.refresh();
+							loadingStep = 0;
+							$(".pulldown-tips").show();
+						} else {
+							$.alert(response.message);
+						}
+					}, 'json');
+				}, 10);
+			}
+
+			function pullUpAction() {
+				console.log(45465768798);
+				setTimeout(function() {
+					$.post("libs/PHP/list.php", function(response) {
+						if(response.state) {
+
+							var a = response.messagetrue;
+
+							for(var j = 13; j < 17; j++) {
+								var n = i++;
+								var cz1 = cz++;
+								var $li = $('<li><a href="details.html?=' + cz1 + '"><img class="lazy" src="' + a[n].productimage + '"/></a><div class="jies">' + a[n].productdetails + '</div><div class="price">' + a[n].productprice + '</div></li>');
+								$('.oul').append($li);
+							}
+							
+							pullUp.attr('class', '').hide();
+							myScroll.refresh();
+							loadingStep = 0;
+							
+						} else {
+							$.alert(response.message);
+						}
+					}, 'json');
+				}, 10);
+			}
+			//      document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);  
+		}
+	</script>
+
+</html>

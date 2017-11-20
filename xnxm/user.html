@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximun-scale= 1.0, minimun-scale= 1.0, user-scalable=1">
+		<title></title>
+		<link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="libs/css/common.min.css" />
+		<link rel="stylesheet" href="libs/css/grzx.css"/>
+		<script src="libs/jquery/jquery-2.1.1.min.js"></script>
+		<script src="libs/js/grzx.js"></script>
+		
+		
+	</head>
+	<body>
+		<div class="header">
+			<div class="header_1">
+				<a href="javascript:history.back()" class="a1"><i class="fa fa-angle-left"></i></a>
+				<div>
+					<a href="#">会员中心</a>					
+				</div>
+				<a href="#" class="a2"><i class="fa fa-list-ul"></i></a>
+			</div>
+		</div>
+		<div class="content">
+			<a href="#" class="user-head">
+				<span><img src="image/18.jpg"></span>
+				<span>
+					<span id="name">123456</span>
+					<span>
+						<img src="image/18.jpg">
+						普通会员
+					</span>
+				</span>
+				<span><i class="fa fa-angle-right"></i></span>
+			</a>
+			<div class="user-finance">
+				<div class="col-xs-4">
+					<a href="#"><div>100</div><div>我的金额</div></a>
+				</div>
+				<div class="col-xs-4">
+					<a href="#"><div>50</div><div>可用金额</div></a>
+				</div>
+				<div class="col-xs-4">
+					<a href="#"><div>1000</div><div>代币</div></a>
+				</div>
+			</div>
+			
+			<div class="user-menu list-group">
+				<a href="#" class="list-group-item">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-circle fa-stack-2x"></i>
+						<i class="clip-user-4 fa-stack-1x fa-inverse"></i>
+					</span>
+					<!--<span style="width: 20px; height: 20px;"><i class="fa fa-user-circle-o"></i></span>-->
+					<span>一级会员</span>
+					<div class="item-count">5</div>
+					<span><i class="fa fa-angle-right"></i></span>
+				</a>
+				<a href="#" class="list-group-item">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-circle fa-stack-2x"></i>
+						<i class="fa clip-user-4 fa-stack-1x fa-inverse"></i>
+					</span>
+					<span>二级会员</span>
+					<div class="item-count">5</div>
+					<span><i class="fa fa-angle-right"></i></span>
+				</a>
+				<a href="#" class="list-group-item">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-circle fa-stack-2x"></i>
+						<i class="fa clip-user-4 fa-stack-1x fa-inverse"></i>
+					</span>
+					<span>三级会员</span>
+					<div class="item-count">5</div>
+					<span><i class="fa fa-angle-right"></i></span>
+				</a>
+			</div>
+			
+			<div class="user-menu list-group">
+				<a href="orderlist.html" class="list-group-item">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-circle fa-stack-2x"></i>
+						<i class="fa clip-user-4 fa-stack-1x fa-inverse"></i>
+					</span>
+					<span>我的订单</span>
+					<span><i class="fa fa-angle-right"></i></span>
+				</a>
+				<a href="#" class="list-group-item">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-circle fa-stack-2x"></i>
+						<i class="fa clip-user-4 fa-stack-1x fa-inverse"></i>
+					</span>
+					<span>升级为商家</span>
+					
+					<span><i class="fa fa-angle-right"></i></span>
+				</a>
+				<a href="#" class="list-group-item">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-circle fa-stack-2x"></i>
+						<i class="fa clip-user-4 fa-stack-1x fa-inverse"></i>
+					</span>
+					<span>完善资料</span>
+					
+					<span><i class="fa fa-angle-right"></i></span>
+				</a>
+			</div>
+			
+		</div>
+		
+		<div class="footer">
+    		<ul>
+    			<li>首页<i class="fa fa-home fa-fw"></i></li>
+    			<li>积分区<i class="fa fa-database"></i></li>
+    			<li>分类<i class="fa fa-cubes"></i></li>
+    			<li><a href="shopcart.html">购物车</a><i class="fa fa-shopping-cart"></i></a></li>
+    			<li><a href="user.html">个人中心</a><i class="fa fa-user-o"></i></li>
+    		</ul>
+    	</div>
+    	<div class="navmorelist" id="navmorelist">
+			<ul class="f14">
+				<li><a href="index.html">首页</a></li>
+				<li><a href="liebiao.html">分类查询</a></li>
+				<li><a href="shopcart.html">购 物 车</a></li>
+				<li><a href="#">会员中心</a></li>
+			</ul>
+		</div>
+	</body>
+	<script>
+		var index=location.search.replace('_','');
+		var index=index.split("=");
+		var name=index[1];
+		$('#name').text(name);
+		
+		
+		
+	</script>
+</html>
